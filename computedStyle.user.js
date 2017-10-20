@@ -12,8 +12,7 @@
 
 (function() {
     'use strict';
-
-    console.log(111);
+    
     // DEV: We don't use var but favor parameters since these play nicer with minification
     function computedStyle(el, prop, getComputedStyle, style) {
         getComputedStyle = window.getComputedStyle;
