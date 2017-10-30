@@ -4,7 +4,8 @@
 // @version      0.1
 // @description  get fonts
 // @author       You
-// @match http:/
+// @match http:///*
+// @match https:///*
 // @grant        none
 // @noframes
 // ==/UserScript==
@@ -48,16 +49,12 @@
     function getFonts() {
         for (var i = elements.length - 1; i >= 0; i--) {
             var ff = computedStyle(elements[i], 'font-family');
+            ff = ff.replace(', "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif', '');
             var fz = computedStyle(elements[i], 'font-size');
             var fw = computedStyle(elements[i], 'font-weight');
-            if(fw == 'normal'){
-                fw = 400;
-            }
             var ls = computedStyle(elements[i], 'letter-spacing');
             if(ls != 'normal') {
                 ls = (parseFloat(ls) / parseFloat(fz)).toFixed(2) + 'em';
-            } else {
-                ls = ' ';
             }
             console.log(ff,';;', fz,';;', fw,';;', ls,';;');
         }
