@@ -4,15 +4,13 @@
 // @version      0.1
 // @description  get fonts
 // @author       You
-// @match http://www/*
-// @match https://www/*
+// @match http:/
 // @grant        none
 // @noframes
 // ==/UserScript==
 
 (function() {
     'use strict';
-    
     // DEV: We don't use var but favor parameters since these play nicer with minification
     function computedStyle(el, prop, getComputedStyle, style) {
         getComputedStyle = window.getComputedStyle;
@@ -49,7 +47,19 @@
     body.appendChild(but);
     function getFonts() {
         for (var i = elements.length - 1; i >= 0; i--) {
-            console.log(computedStyle(elements[i], 'font-family'),';;', computedStyle(elements[i], 'font-size'),';;', computedStyle(elements[i], 'font-weight'),';;');
+            var ff = computedStyle(elements[i], 'font-family');
+            var fz = computedStyle(elements[i], 'font-size');
+            var fw = computedStyle(elements[i], 'font-weight');
+            if(fw == 'normal'){
+                fw = 400;
+            }
+            var ls = computedStyle(elements[i], 'letter-spacing');
+            if(ls != 'normal') {
+                ls = (parseFloat(ls) / parseFloat(fz)).toFixed(2) + 'em';
+            } else {
+                ls = ' ';
+            }
+            console.log(ff,';;', fz,';;', fw,';;', ls,';;');
         }
     }
 
