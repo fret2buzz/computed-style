@@ -41,12 +41,15 @@
     window.computedStyle = computedStyle;
 
     var body = document.querySelectorAll('body')[0];
-    var elements = document.querySelectorAll('*');
     var but = document.createElement('button');
     but.innerHTML = 'Get fonts';
     but.setAttribute("style", "position: fixed; left: 0; top: 0; z-index: 999999;");
     body.appendChild(but);
+    
+    var uniqueList = [];
+    
     function getFonts() {
+        var elements = document.querySelectorAll('*');
         for (var i = elements.length - 1; i >= 0; i--) {
             var ff = computedStyle(elements[i], 'font-family');
             ff = ff.replace(', "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif', '');
@@ -56,7 +59,14 @@
             if(ls != 'normal') {
                 ls = (parseFloat(ls) / parseFloat(fz)).toFixed(2) + 'em';
             }
-            console.log(ff,';;', fz,';;', fw,';;', ls,';;');
+            var fontItem = ff + ';;' + fz + ';;' + fw + ';;' + ls + ';;';
+            if(uniqueList.indexOf(fontItem) === -1){
+                uniqueList.push(fontItem);
+            }
+        }
+        uniqueList.sort();
+        for (var z = 0; z < uniqueList.length; z++) {
+            console.log(uniqueList[z]);
         }
     }
 
