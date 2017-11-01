@@ -60,7 +60,7 @@
                 ls = (parseFloat(ls) / parseFloat(fz)).toFixed(2) + 'em';
             }
             var fontItem = ff + ';;' + fz + ';;' + fw + ';;' + ls + ';;';
-            if(uniqueList.indexOf(fontItem) === -1){
+            if(uniqueList.indexOf(fontItem) === -1) {
                 uniqueList.push(fontItem);
             }
         }
